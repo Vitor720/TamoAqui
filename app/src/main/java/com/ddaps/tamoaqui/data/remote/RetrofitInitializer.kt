@@ -1,5 +1,6 @@
 package com.ddaps.tamoaqui.data.remote
 
+import com.ddaps.tamoaqui.util.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

@@ -1,16 +1,14 @@
 package com.ddaps.tamoaqui.common.domain.usecase
 
-import com.ddaps.tamoaqui.common.domain.models.CheckInDataRequest
-import com.ddaps.tamoaqui.common.domain.models.CheckInDataResponseOfRequest
-import com.ddaps.tamoaqui.common.domain.models.EventDataResponse
-import com.ddaps.tamoaqui.common.domain.models.Resource
+import com.ddaps.tamoaqui.common.domain.models.*
 import com.ddaps.tamoaqui.data.repository.EventsRepository
+import com.ddaps.tamoaqui.util.mapForView
 
 class EventUseCase(private val eventsRepo: EventsRepository) {
 
-    suspend fun getEventsList(): Resource<List<EventDataResponse>>{
+    suspend fun getEventsList(): Resource<List<Event>>{
         val response = eventsRepo.getEventsList()
-        return response
+        return Resource(response.status, response.data?.mapForView(), response.message)
     }
 
     suspend fun postCheckIn(eventId: Int, userName: String, userEmail: String ): Resource<CheckInDataResponseOfRequest>{

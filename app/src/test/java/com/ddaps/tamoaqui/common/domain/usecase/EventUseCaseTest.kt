@@ -32,7 +32,7 @@ class EventUseCaseTest {
         eventUseCase = EventUseCase(mockEventsRepository)
         mockEventsList = listOf(mockk(), mockk())
         mockCheckInResponse = mockk()
-        mockCheckInRequest = mockk()
+        mockCheckInRequest = CheckInDataRequest(1, "Joao Vitor", "jv_2020@gmail.com")
     }
 
     @Test
@@ -54,18 +54,17 @@ class EventUseCaseTest {
 
     @Test
     fun `postCheckIn - on repository success - should return expected data type`() = runBlocking {
-        coEvery { mockEventsRepository.postCheckIn(mockCheckInRequest) } returns Resource.success(mockCheckInResponse)
-        val response = eventUseCase.postCheckIn(mockCheckInRequest.event_id, mockCheckInRequest)
+        coEvery { mockEventsRepository.postCheckIn(any()) } returns Resource.success(mockCheckInResponse)
+        val response = eventUseCase.postCheckIn(mockCheckInRequest.event_id, mockCheckInRequest.user_name, mockCheckInRequest.email)
         Assert.assertEquals("Tipo incorreto", mockCheckInResponse, response.data)
         Assert.assertEquals("Status Incorreto", Status.SUCCESS, response.status)
-        coVerify(exactly = 1) { mockEventsRepository.postCheckIn(mockCheckInRequest) }
     }
 
     @Test
     fun `postCheckIn - on repository failure - should return expected data`() = runBlocking {
-        coEvery { mockEventsRepository.postCheckIn(mockCheckInRequest) } returns Resource.error(INTERNET_FAILURE, null)
-        val response = eventUseCase.postCheckIn(mockCheckInRequest.event_id, mockCheckInRequest)
-        Assert.assertEquals("Status Incorreto", Status.SUCCESS, response.status)
+        coEvery { mockEventsRepository.postCheckIn(any()) } returns Resource.error(INTERNET_FAILURE, null)
+        val response = eventUseCase.postCheckIn(mockCheckInRequest.event_id, mockCheckInRequest.user_name, mockCheckInRequest.email)
+        Assert.assertEquals("Status Incorreto", Status.ERROR, response.status)
     }
 
 }

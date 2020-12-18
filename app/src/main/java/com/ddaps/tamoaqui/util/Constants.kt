@@ -6,3 +6,4 @@ const val INTERNET_FAILURE = "No Internet Detected"
 const val NOT_FOUND = "Not Found"
 const val AUTHORIZATION_DENIED = "Not Authorized"
 const val TIMEOUT = "Timeout"
+const val FREE_ENTRY = 0.0

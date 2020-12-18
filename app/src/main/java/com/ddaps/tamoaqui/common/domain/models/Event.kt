@@ -2,13 +2,26 @@ package com.ddaps.tamoaqui.common.domain.models
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.ddaps.tamoaqui.util.FREE_ENTRY
 
 data class Event(val id: Int,
                  val name: String,
                  val image: String,
                  val address: String,
                  val details: String,
-                 val date: String): Parcelable {
+                 val date: String,
+                 val entryFee: Double,
+                 val time: String): Parcelable {
+
+    fun getEventTimeRange(): String = time
+
+    fun getEntryFee(): String{
+        return if (entryFee > FREE_ENTRY){
+            "Gratuito"
+        }else{
+            "R$ $entryFee"
+        }
+    }
 
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
@@ -16,9 +29,10 @@ data class Event(val id: Int,
         parcel.readString().toString(),
         parcel.readString().toString(),
         parcel.readString().toString(),
+        parcel.readString().toString(),
+        parcel.readDouble(),
         parcel.readString().toString()
-    ) {
-    }
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
@@ -27,6 +41,8 @@ data class Event(val id: Int,
         parcel.writeString(address)
         parcel.writeString(details)
         parcel.writeString(date)
+        parcel.writeDouble(entryFee)
+        parcel.writeString(time)
     }
 
     override fun describeContents(): Int {

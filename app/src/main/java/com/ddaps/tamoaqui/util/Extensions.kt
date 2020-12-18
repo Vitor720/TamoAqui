@@ -11,14 +11,15 @@ import com.ddaps.tamoaqui.common.domain.models.EventDataResponse
 
 fun List<EventDataResponse>.mapForView(): List<Event>{
     val eventList = this.map {
-        Event(
-            it.id ?: -999,
+        Event(it.id,
             it.name ?: "",
             it.image ?: "",
             it.address ?: "",
             it.details ?: "",
-            it.date ?:""
-            )
+            it.date ?:"",
+            it.entry_fee ?: FREE_ENTRY,
+            it.time ?: ""
+        )
         }
         val sortedEvents = eventList.sortedBy { it.date }
         return sortedEvents

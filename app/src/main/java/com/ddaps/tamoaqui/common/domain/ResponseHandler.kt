@@ -1,7 +1,7 @@
 package com.ddaps.tamoaqui.common.domain
 
 import com.ddaps.tamoaqui.common.domain.models.Resource
-import com.ddaps.tamoaqui.util.SOCKET_TIMEOUT_ERROR_CODE
+import com.ddaps.tamoaqui.util.*
 import retrofit2.HttpException
 import java.net.SocketTimeoutException
 
@@ -20,10 +20,10 @@ open class ResponseHandler {
 
     private fun getErrorMessage(code: Int): String {
         return when (code) {
-            -1 -> "Timeout"
-            401 -> "Not Authorized"
-            404 -> "Not Found"
-            else -> "No Internet Dected"
+            -1 -> TIMEOUT
+            401 -> AUTHORIZATION_DENIED
+            404 -> NOT_FOUND
+            else -> INTERNET_FAILURE
         }
     }
 }

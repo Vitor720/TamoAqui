@@ -19,11 +19,11 @@ import com.ddaps.tamoaqui.ui.adapters.EventAdapter
 import com.ddaps.tamoaqui.ui.viewModel.EventViewModel
 import com.ddaps.tamoaqui.util.EventClickListener
 import com.google.android.material.snackbar.Snackbar
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment(), EventClickListener {
 
-    private val viewModel: EventViewModel by sharedViewModel()
+    private val viewModel: EventViewModel by viewModel()
     private var binding: FragmentHomeBinding? = null
     private var adapter: EventAdapter? = null
 

@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.ddaps.tamoaqui.ui.fragments.HomeFragment"
-        android:label="fragment_home"
+        android:label="Lista de eventos"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_eventDetailsFragment"
@@ -21,7 +21,7 @@
     <fragment
         android:id="@+id/eventDetailsFragment"
         android:name="com.ddaps.tamoaqui.ui.fragments.EventDetailsFragment"
-        android:label="fragment_event_details"
+        android:label="Detalhes do evento"
         tools:layout="@layout/fragment_event_details" >
         <argument
             android:name="eventData"

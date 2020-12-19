@@ -1,9 +1,11 @@
 package com.ddaps.tamoaqui.common.domain.models
 
-class EventDataResponse(id: Int?,
-                        name: String?,
-                        image: String?,
-                        address: String?,
-                        details: String?,
-                        date: String?) {
+class EventDataResponse(val id: Int,
+                        val name: String?,
+                        val image: String?,
+                        val address: String?,
+                        val details: String?,
+                        val date: String?,
+                        val entry_fee: Double?,
+                        val time: String?) {
 }

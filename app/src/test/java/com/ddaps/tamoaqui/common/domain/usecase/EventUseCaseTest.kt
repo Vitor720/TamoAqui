@@ -1,11 +1,9 @@
 package com.ddaps.tamoaqui.common.domain.usecase
 
 import com.ddaps.tamoaqui.common.domain.Status
-import com.ddaps.tamoaqui.common.domain.models.CheckInDataRequest
-import com.ddaps.tamoaqui.common.domain.models.CheckInDataResponseOfRequest
-import com.ddaps.tamoaqui.common.domain.models.EventDataResponse
-import com.ddaps.tamoaqui.common.domain.models.Resource
+import com.ddaps.tamoaqui.common.domain.models.*
 import com.ddaps.tamoaqui.data.repository.EventsRepository
+import com.ddaps.tamoaqui.util.FREE_ENTRY
 import com.ddaps.tamoaqui.util.INTERNET_FAILURE
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -22,22 +20,24 @@ class EventUseCaseTest {
 
     private lateinit var mockEventsRepository: EventsRepository
     private lateinit var eventUseCase : EventUseCase
-    private lateinit var mockEventsList : List<EventDataResponse>
+    private lateinit var mockEventResponseList : List<EventDataResponse>
     private lateinit var mockCheckInResponse: CheckInDataResponseOfRequest
     private lateinit var mockCheckInRequest: CheckInDataRequest
+    private lateinit var mockEventsList: List<Event>
 
     @Before
     fun setup(){
         mockEventsRepository = mockk()
         eventUseCase = EventUseCase(mockEventsRepository)
-        mockEventsList = listOf(mockk(), mockk())
+        mockEventsList = listOf(Event(2, "Encontro", "image.jpg", "online", "sem detalhes", "12/12/2021", FREE_ENTRY, "11:00 ~ 13:00"))
+        mockEventResponseList = listOf(EventDataResponse(2, "Encontro", "image.jpg", "online", "sem detalhes", "12/12/2021", FREE_ENTRY, "11:00 ~ 13:00"))
         mockCheckInResponse = mockk()
         mockCheckInRequest = CheckInDataRequest(1, "Joao Vitor", "jv_2020@gmail.com")
     }
 
     @Test
     fun `getEventsList - on repository success - should return expected data type`() = runBlocking {
-        coEvery { mockEventsRepository.getEventsList() } returns Resource.success(mockEventsList)
+        coEvery { mockEventsRepository.getEventsList() } returns Resource.success(mockEventResponseList)
         val response = eventUseCase.getEventsList()
         Assert.assertEquals("Tipo incorreto", mockEventsList, response.data)
         Assert.assertEquals("Status Incorreto", Status.SUCCESS, response.status)

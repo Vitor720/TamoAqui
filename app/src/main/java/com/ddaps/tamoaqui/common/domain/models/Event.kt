@@ -17,9 +17,9 @@ data class Event(val id: Int,
 
     fun getEntryFee(): String{
         return if (entryFee > FREE_ENTRY){
-            "Gratuito"
-        }else{
             "R$ $entryFee"
+        }else{
+            "Gratuito"
         }
     }
 

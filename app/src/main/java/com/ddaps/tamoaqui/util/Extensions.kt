@@ -1,5 +1,6 @@
 package com.ddaps.tamoaqui.util
 
+import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
@@ -11,7 +12,8 @@ import com.ddaps.tamoaqui.common.domain.models.EventDataResponse
 
 fun List<EventDataResponse>.mapForView(): List<Event>{
     val eventList = this.map {
-        Event(it.id,
+        Event(
+            it.id,
             it.name ?: "",
             it.image ?: "",
             it.address ?: "",
@@ -35,4 +37,12 @@ fun ImageView.load(imagemUrl: String?) {
                               .load(imagemUrl)
                               .transition(DrawableTransitionOptions.withCrossFade(299))
     requestOptions.into(imageView)
+}
+
+fun View.esconder(){
+    this.visibility = View.GONE
+}
+
+fun View.mostrar(){
+    this.visibility = View.VISIBLE
 }
